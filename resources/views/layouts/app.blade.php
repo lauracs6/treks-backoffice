@@ -16,7 +16,7 @@
         @stack('styles')
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gradient-to-br from-slate-50 via-slate-50 to-cyan-50">
+        <div class="min-h-screen bg-white">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
