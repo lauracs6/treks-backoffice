@@ -22,7 +22,7 @@
                         <x-text-input id="q" name="q" type="text"
                             class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm"
                             value="{{ $search }}"
-                            placeholder="Name, email or DNI" />
+                            placeholder="Enter name, email, phone or dni" />
                     </div>
 
                     <div>
@@ -50,13 +50,13 @@
                     </div>
 
                     <div class="md:col-span-4 flex gap-3">
-                        <x-primary-button class="bg-sky-500 hover:bg-sky-700 rounded-lg shadow-sm">
+                        <x-primary-button class="bg-sky-500 hover:bg-sky-700 rounded-none shadow-lg shadow-gray-700">
                             Search
                         </x-primary-button>
 
                         @if($search !== '' || $role !== 'all' || $status !== 'all')
                             <a href="{{ route('admin.users.index') }}"
-                               class="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-300">
+                               class="px-4 py-2 bg-black text-white text-sm font-medium hover:bg-gray-600 shadow-lg shadow-gray-700">
                                 Clear
                             </a>
                         @endif
@@ -86,7 +86,7 @@
                                 @endphp
 
                                 <tr class="hover:bg-gray-50">
-                                    <td class="py-3 px-4 border border-gray-100">{{ $user->id }}</td>
+                                    <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $user->id }}</td>
 
                                     <td class="py-3 px-4 font-medium text-gray-900 border border-gray-100">
                                         {{ $user->name }} {{ $user->lastname }}
@@ -97,7 +97,7 @@
                                     <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $user->dni }}</td>
 
                                     <td class="py-3 px-4 border border-gray-100">
-                                        <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-medium">
+                                        <span class="bg-gray-100 text-sky-600 px-3 py-1 rounded-full text-xs font-medium">
                                             {{ $user->role?->name ?? '-' }}
                                         </span>
                                     </td>
@@ -118,21 +118,21 @@
                                     <td class="py-3 px-4 border border-gray-100 w-32">
                                         <div class="flex justify-center gap-2">
                                             @if ($isAdminUser)
-                                                <button disabled class="px-3 py-1 rounded-lg bg-gray-400 text-white text-xs font-semibold cursor-not-allowed">View</button>
-                                                <button disabled class="px-3 py-1 rounded-lg bg-gray-400 text-white text-xs font-semibold cursor-not-allowed">Edit</button>
-                                                <button disabled class="px-3 py-1 rounded-lg bg-gray-400 text-white text-xs font-semibold cursor-not-allowed">Deactivate</button>
+                                                <button disabled class="px-3 py-1 bg-gray-400 text-white text-xs font-semibold shadow-sm shadow-gray-700 cursor-not-allowed">View</button>
+                                                <button disabled class="px-3 py-1 bg-gray-400 text-white text-xs font-semibold shadow-sm shadow-gray-700 cursor-not-allowed">Edit</button>
+                                                <button disabled class="px-3 py-1 bg-gray-400 text-white text-xs font-semibold shadow-sm shadow-gray-700 cursor-not-allowed">Deactivate</button>
                                             @else
                                                 <a href="{{ route('admin.users.show', $user->id) }}"
-                                                class="px-3 py-1 rounded-lg bg-black hover:bg-lime-700 text-lime-300 text-xs font-semibold shadow-sm">View</a>
+                                                class="px-3 py-1 bg-lime-400 hover:bg-lime-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">View</a>
                                                 <a href="{{ route('admin.users.edit', $user->id) }}"
-                                                class="px-3 py-1 rounded-lg bg-black hover:bg-sky-700 text-sky-300 text-xs font-semibold shadow-sm">Edit</a>
+                                                class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">Edit</a>
 
                                                 @if ($user->status !== 'n')
                                                     <form method="POST" action="{{ route('admin.users.deactivate', $user->id) }}" onsubmit="return confirm('Are you sure you want to deactivate this user?');">
                                                         @csrf
                                                         @method('PATCH')
                                                         <button type="submit"
-                                                            class="px-3 py-1 rounded-lg bg-red-600 hover:bg-red-400 text-white text-xs font-semibold shadow-sm">
+                                                            class="px-3 py-1 bg-red-500 hover:bg-red-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
                                                             Deactivate
                                                         </button>
                                                     </form>
@@ -141,7 +141,7 @@
                                                         @csrf
                                                         @method('PATCH')
                                                         <button type="submit"
-                                                            class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-400 text-white text-xs font-semibold shadow-sm">
+                                                            class="px-3 py-1 bg-emerald-500 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
                                                             Activate
                                                         </button>
                                                     </form>

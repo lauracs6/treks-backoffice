@@ -78,10 +78,10 @@
                         </div>
 
                         <div class="flex justify-center gap-4">
-                            <x-primary-button type="submit" class="bg-sky-500 hover:bg-sky-700 rounded-lg shadow-sm">
+                            <x-primary-button type="submit" class="bg-sky-500 hover:bg-sky-700 rounded-none shadow-lg shadow-gray-700">
                                 Save
                             </x-primary-button>
-                            <a href="{{ route('admin.users.index') }}" class="px-4 py-2 rounded-lg bg-black text-gray-100 text-sm font-medium hover:bg-gray-500">
+                            <a href="{{ route('admin.users.index') }}" class="px-4 py-2 bg-black text-gray-100 text-sm font-medium hover:bg-gray-500 shadow-lg shadow-gray-700">
                                 Back to Users
                             </a>
                         </div>

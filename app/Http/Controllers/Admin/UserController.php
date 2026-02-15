@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    // Listado con filtros y búsqueda de usuarios
+    // Lista con filtros de búsqueda de usuarios
     public function index(Request $request)
     {
         $search = trim((string) $request->query('q'));
@@ -27,7 +27,8 @@ class UserController extends Controller
                         ->where('name', 'like', "%{$search}%")
                         ->orWhere('lastname', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%")
-                        ->orWhere('dni', 'like', "%{$search}%");
+                        ->orWhere('dni', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
                 });
             })
             ->when($role !== 'all', function ($query) use ($role) {
