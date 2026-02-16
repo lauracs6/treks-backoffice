@@ -1,34 +1,48 @@
 <x-app-layout>
-    <div class="py-6 bg-gradient-to-br from-sky-50 via-indigo-50 to-white">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-4 flex justify-between items-center bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl px-5 py-4">
-                <div>
-                    <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-sky-700 bg-sky-100 rounded-full">Encuentro</span>
-                    <h2 class="mt-2 font-semibold text-xl text-gray-800 leading-tight">Crear nuevo encuentro</h2>
-                </div>
-                <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                    Volver
-                </a>
-            </div>
+    <div class="bg-white min-h-screen">
 
-            <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
-                <div class="p-6 text-slate-900">
-                    <form method="POST" action="{{ route('admin.meetings.store') }}" class="space-y-6">
-                        @csrf
+        {{-- White header like treks create --}}
+        <div class="bg-white border-b border-gray-100 shadow-sm">
+            <div class="max-w-8xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-900">Create Meeting</h1>
 
-                        @include('admin.meetings.form')
-
-                        <div class="flex items-center gap-3">
-                            <x-primary-button type="submit">
-                                Crear encuentro
-                            </x-primary-button>
-                            <a href="{{ route('admin.meetings.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
-                                Volver a la lista
-                            </a>
-                        </div>
-                    </form>
+                <div class="flex space-x-4">
+                    <a href="{{ route('admin.meetings.index') }}"
+                       class="px-4 py-2 bg-black text-white text-s hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        Back to meetings
+                    </a>
                 </div>
             </div>
         </div>
+
+        {{-- Form container like treks create --}}
+        <div class="max-w-8xl mx-auto px-8 mt-10">
+            <div class="p-6 text-slate-900">
+                <form method="POST" action="{{ route('admin.meetings.store') }}" class="space-y-6">
+                    @csrf
+
+                    {{-- Include the meeting form partial --}}
+                    @include('admin.meetings.form', [
+                        'meeting' => $meeting ?? null,
+                        'treks' => $treks,
+                        'guides' => $guides,
+                    ])
+
+                    {{-- Submit and back buttons styled like treks create --}}
+                    <div class="py-6 flex justify-center gap-3">
+                        <button type="submit"
+                                class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-700 shadow-lg shadow-gray-700">
+                            Create Meeting
+                        </button>
+                        <a href="{{ route('admin.meetings.index') }}"
+                           class="px-4 py-2 bg-black text-white text-s hover:bg-gray-700 shadow-lg shadow-gray-700">
+                            Back to Meetings
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
     </div>
 </x-app-layout>

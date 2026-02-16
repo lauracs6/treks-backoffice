@@ -5,11 +5,17 @@
         <div class="bg-white border-b border-gray-100 shadow-sm">
             <div class="max-w-8xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-gray-900">User Details</h1>
-
-                <a href="{{ route('admin.users.index') }}"
-                class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-700 shadow-lg shadow-gray-700">
-                    Back to Users
-                </a>
+                <div class="flex space-x-4">
+                    <a href="{{ route('admin.users.edit', $user->id) }}"
+                    class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-700 shadow-lg shadow-gray-700">
+                        Edit
+                    </a>
+                    
+                    <a href="{{ route('admin.users.index') }}"
+                    class="px-4 py-2 bg-black text-white text-s hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        Back to Users
+                    </a> 
+                </div>               
             </div>
         </div>
 
@@ -106,6 +112,33 @@
                         @endforelse
                     </div>
                 </div>
+        </div>
+
+        {{-- User Pagination --}}
+        <div class="mt-4 mb-10 flex justify-center gap-4">
+            @if($previous)
+                <a href="{{ route('admin.users.show', $previous->id) }}"
+                class="px-4 py-2 bg-black text-white shadow-lg shadow-gray-700 hover:bg-gray-700 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Previous
+                </a>
+            @endif
+
+            @if($next)
+                <a href="{{ route('admin.users.show', $next->id) }}"
+                class="px-4 py-2 bg-black text-white shadow-lg shadow-gray-700 hover:bg-gray-700 flex items-center">
+                    Next
+                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+            @endif
         </div>
     </div>
 </x-app-layout>

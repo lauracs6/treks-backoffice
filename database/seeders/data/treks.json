@@ -2,8 +2,8 @@
   {
     "regNumber": "T01",
     "name": "Serra de Tramuntana Central",
-    "description": "Recorrido por el corazón de la Serra de Tramuntana, entre encinares, caminos de piedra y miradores naturales.",
-    "imageUrl": "images/treks/Sierra-Tramuntana.jpg",
+    "description": "A spectacular route through the heart of the Serra de Tramuntana, combining rugged mountain landscapes, winding trails, and breathtaking viewpoints over valleys and terraced hillsides. Along the way, hikers will encounter ancient stone walls, traditional dry-stone terraces, and a rich variety of native flora and fauna, making it an unforgettable immersion into Mallorca's natural and cultural heritage.",
+    "imageUrl": "images/treks/T01.jpg",
     "municipality": "Alaró",
     "meetings": [
       {
@@ -59,8 +59,8 @@
   {
     "regNumber": "T02",
     "name": "Ruta Costera del Llevant",
-    "description": "Ruta litoral por el Llevant con tramos de costa, calas y vistas abiertas al Mediterráneo.",
-    "imageUrl": "images/treks/Ruta-Llevant.jpg",
+    "description": "A historic coastal trail following the ancient Camí de Cavalls, offering dramatic sea views, unspoiled beaches, and hidden coves. The path winds past centuries-old watchtowers and cliffs overlooking the sparkling Mediterranean, providing endless opportunities for photography, relaxation, and encounters with local wildlife along a truly historic seafaring route.",
+    "imageUrl": "images/treks/T02.jpg",
     "municipality": "Artà",
     "meetings": [
       {
@@ -128,8 +128,8 @@
   {
     "regNumber": "T03",
     "name": "Ascenso al Puig Major",
-    "description": "Ascenso exigente al techo de Mallorca, con ambiente de montaña y panorámicas espectaculares.",
-    "imageUrl": "images/treks/Puig-mayor.jpg",
+    "description": "A demanding mountain trek leading to the highest peak in the Balearic Islands, ideal for experienced hikers. This challenging ascent offers sweeping panoramas of rugged cliffs, forested slopes, and distant island vistas. The trek tests stamina and navigation skills while rewarding adventurers with breathtaking summit views and a profound sense of achievement.",
+    "imageUrl": "images/treks/T03.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -185,8 +185,8 @@
   {
     "regNumber": "T04",
     "name": "Camí de Cavalls (Menorca)",
-    "description": "Tramo del histórico Camí de Cavalls menorquín, entre costa, calas y paisajes marinos.",
-    "imageUrl": "images/treks/Cami-cavalls.jpg",
+    "description": "An adventurous trek through a dramatic canyon carved by centuries of water erosion, ending at a stunning hidden beach. The trail passes through narrow gorges, rocky outcrops, and shaded groves, offering a mix of physical challenge and serene beauty. Perfect for explorers seeking off-the-beaten-path experiences, this trek also provides opportunities to spot unique rock formations and endemic wildlife.",
+    "imageUrl": "images/treks/T04.jpg",
     "municipality": "Maó",
     "meetings": [
       {
@@ -242,8 +242,8 @@
   {
     "regNumber": "T05",
     "name": "Ruta del Torrent de Pareis",
-    "description": "Descenso aventurero por el Torrent de Pareis hasta el mar, con tramos técnicos y un paisaje único.",
-    "imageUrl": "images/treks/Torrent-pareis.jpg",
+    "description": "A relaxed coastal walk connecting crystal-clear coves, golden sands, and shimmering Mediterranean scenery. Gentle slopes and well-marked paths make it ideal for families and casual walkers, while occasional cliffside viewpoints reveal panoramic vistas of the coastline, lighthouses, and fishing villages, creating a perfect combination of leisure and discovery.",
+    "imageUrl": "images/treks/T05.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -299,8 +299,8 @@
   {
     "regNumber": "T06",
     "name": "Camí de Ses Fonts",
-    "description": "Paseo tranquilo por senderos con fuentes y vegetación mediterránea, ideal para una caminata relajada.",
-    "imageUrl": "images/treks/cami-fonts.jpg",
+    "description": "A scenic circular route showcasing iconic coastal rock formations, secluded beaches, and panoramic viewpoints. Hikers will pass through fragrant pine forests, rocky cliffs, and hidden inlets, making it a trek rich in visual variety. The route is perfect for photography enthusiasts, nature lovers, and anyone seeking an immersive experience in Mallorca’s dramatic coastal landscapes.",
+    "imageUrl": "images/treks/T06.jpg",
     "municipality": "Artà",
     "meetings": [
       {
@@ -356,8 +356,8 @@
   {
     "regNumber": "T07",
     "name": "Ruta de Cala Figuera",
-    "description": "Ruta costera hacia el entorno marinero de Cala Figuera, con paisajes de litoral y ambiente mediterráneo.",
-    "imageUrl": "images/treks/parque-llevant.jpg",
+    "description": "A traditional pilgrimage route winding through dense forests, historic pathways, and charming villages. The trail follows ancient markers and stone paths once used by pilgrims, offering glimpses into Mallorca's spiritual and cultural history. Along the way, hikers can enjoy tranquil landscapes, centuries-old chapels, and the peaceful rhythm of a journey steeped in tradition.",
+    "imageUrl": "images/treks/T07.jpg",
     "municipality": "Santanyí",
     "meetings": [
       {
@@ -413,8 +413,8 @@
   {
     "regNumber": "T08",
     "name": "Cala Varques",
-    "description": "Sendero hacia Cala Varques, con tramos rocosos y llegada a una cala de aguas turquesas.",
-    "imageUrl": "images/treks/parque-llevant.jpg",
+    "description": "A stone-stepped ascent through a lush ravine surrounded by olive groves, wildflowers, and shaded streams. This trek combines moderate physical challenge with abundant natural beauty, leading to elevated viewpoints that reward hikers with sweeping vistas of valleys, nearby mountains, and distant coastal landscapes. Ideal for those seeking tranquility and a connection with nature.",
+    "imageUrl": "images/treks/T08.jpg",
     "municipality": "Manacor",
     "meetings": [
       {
@@ -470,8 +470,8 @@
   {
     "regNumber": "T09",
     "name": "Torrent de Pareis Corto",
-    "description": "Versión corta del Torrent de Pareis: intensa, con tramos técnicos y un paisaje de barranco impresionante.",
-    "imageUrl": "images/treks/Torrent-pareis.jpg",
+    "description": "A coastal trek linking charming fishing villages, sandy coves, and historic lighthouses. The path offers continuous views of the azure Mediterranean, rugged cliffs, and quiet beaches, interspersed with local architecture and cultural landmarks. This trek combines the beauty of seaside walks with the charm of traditional island life, perfect for explorers and photography enthusiasts.",
+    "imageUrl": "images/treks/T09.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -527,8 +527,8 @@
   {
     "regNumber": "T10",
     "name": "Ruta de la Trapa",
-    "description": "Ruta clásica a La Trapa con vistas a Sa Dragonera y la costa suroeste de Mallorca.",
-    "imageUrl": "images/treks/ruta-la-trapa.jpg",
+    "description": "A classic mountain route offering wide panoramic summit views of valleys, ridges, and distant coastlines. The trek passes through pine forests, rocky trails, and shaded areas, making it suitable for hikers seeking both challenge and reward. Along the way, adventurers will encounter natural springs, wildlife, and breathtaking sunrises or sunsets from high vantage points.",
+    "imageUrl": "images/treks/T10.jpg",
     "municipality": "Andratx",
     "meetings": [
       {
@@ -584,8 +584,8 @@
   {
     "regNumber": "T11",
     "name": "Camí de Sa Foradada",
-    "description": "Caminata icónica hacia Sa Foradada, con vistas al mar y un final muy fotogénico.",
-    "imageUrl": "images/treks/sa-foradada.jpg",
+    "description": "A dramatic cliffside walk with vertiginous Mediterranean views, where trails hug steep rock faces and wind around hidden coves. Adventurers will experience the thrill of exposure and the serenity of isolated beaches, while enjoying the spectacular interplay of sea, sky, and rugged cliffs. Perfect for experienced hikers seeking awe-inspiring coastal scenery.",
+    "imageUrl": "images/treks/T11.jpg",
     "municipality": "Banyalbufar",
     "meetings": [
       {
@@ -641,8 +641,8 @@
   {
     "regNumber": "T12",
     "name": "Puig de Massanella",
-    "description": "Ascenso al Massanella, una de las cumbres más emblemáticas de la Tramuntana, con grandes panorámicas.",
-    "imageUrl": "images/treks/sa-massanella.jpg",
+    "description": "A historic high-altitude trail created for panoramic exploration, passing ancient watchtowers, ruins, and high ridgelines. The path offers unmatched views of the surrounding islands and the deep blue sea, while also immersing hikers in Mallorca's rich history and strategic military heritage. This trek blends adventure, history, and spectacular vistas in one challenging route.",
+    "imageUrl": "images/treks/T12.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -698,8 +698,8 @@
   {
     "regNumber": "T13",
     "name": "Cala Tuent",
-    "description": "Ruta hacia Cala Tuent, un rincón entre montañas y mar, con paisajes típicos de la Tramuntana.",
-    "imageUrl": "images/treks/cala-tuent.jpg",
+    "description": "A scenic coastal connection between iconic coves, hidden beaches, and turquoise waters. The trek winds along cliff tops, gentle slopes, and pine-shaded paths, providing a diverse experience of Mallorca’s coastline. Along the way, hikers can relax at secluded coves, admire marine life, and enjoy peaceful moments in a pristine natural setting.",
+    "imageUrl": "images/treks/T13.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -755,8 +755,8 @@
   {
     "regNumber": "T14",
     "name": "Sa Calobra",
-    "description": "Ruta por Sa Calobra con miradores y un final espectacular junto al mar.",
-    "imageUrl": "images/treks/sa-calobra.jpg",
+    "description": "A challenging circular trek around one of Mallorca’s highest peaks, offering steep ascents, rocky paths, and panoramic mountain vistas. Adventurers will encounter diverse terrain, from pine forests to alpine meadows, with breathtaking views of surrounding peaks, valleys, and distant coastline. This trek is ideal for seasoned hikers seeking endurance, challenge, and unrivaled scenery.",
+    "imageUrl": "images/treks/T14.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -812,8 +812,8 @@
   {
     "regNumber": "T15",
     "name": "Camí de Sa Calobra - Torrent de Pareis",
-    "description": "Combinación Sa Calobra + Torrent de Pareis: una experiencia completa de barranco y costa para senderistas preparados.",
-    "imageUrl": "images/treks/sa-calobra.jpg",
+    "description": "A breathtaking route along Mallorca’s northernmost cliffs, featuring dramatic drop-offs, windswept landscapes, and sweeping ocean views. The path meanders along rugged coastlines, offering photo opportunities, quiet resting spots, and the chance to observe seabirds and marine life. A true highlight for those seeking the island’s most impressive coastal panoramas.",
+    "imageUrl": "images/treks/T15.jpg",
     "municipality": "Escorca",
     "meetings": [
       {
@@ -869,8 +869,8 @@
   {
     "regNumber": "T16",
     "name": "Ruta de Cala Mondragó",
-    "description": "Sendero fácil por el Parc Natural de Mondragó, con tramos de costa y acceso a calas muy bonitas.",
-    "imageUrl": "images/treks/cala-mondrago.jpg",
+    "description": "An easy nature walk through a protected coastal park, filled with native plants, birdlife, and gently undulating paths. Perfect for families or casual walkers, the route offers shaded areas, educational signage about local flora and fauna, and occasional viewpoints over calm coves and crystal-clear waters. A peaceful escape into Mallorca’s natural heritage.",
+    "imageUrl": "images/treks/T16.jpg",
     "municipality": "Santanyí",
     "meetings": [
       {
@@ -926,8 +926,8 @@
   {
     "regNumber": "T17",
     "name": "Ruta de Formentor",
-    "description": "Ruta panorámica por Formentor, con acantilados y vistas al cabo en uno de los paisajes más icónicos.",
-    "imageUrl": "images/treks/ruta-formentior.png",
+    "description": "A historic climb to a medieval castle perched atop a hill, offering sweeping island views and a journey through centuries-old paths. The trek combines moderate uphill sections with cultural exploration, passing ancient walls, lookout points, and scenic stops along the way. Ideal for history enthusiasts and those who enjoy combining adventure with cultural discovery.",
+    "imageUrl": "images/treks/T17.png",
     "municipality": "Pollença",
     "meetings": [
       {
@@ -983,8 +983,8 @@
   {
     "regNumber": "T18",
     "name": "Ruta del Puig de l’Ofre",
-    "description": "Subida al Puig de l’Ofre con vistas al embalse de Cúber y a la Tramuntana interior.",
-    "imageUrl": "images/treks/puig-ofre.jpg",
+    "description": "A picturesque coastal path linking an artistic village and its charming cove, featuring winding streets, whitewashed houses, and small artisan shops. Hikers can enjoy gentle coastal trails, panoramic viewpoints, and opportunities to relax on quiet beaches. This trek combines art, culture, and nature in an immersive experience along Mallorca’s scenic coastline.",
+    "imageUrl": "images/treks/T18.jpg",
     "municipality": "Sóller",
     "meetings": [
       {
@@ -1040,7 +1040,7 @@
   {
     "regNumber": "T19",
     "name": "Ruta de Cala Deià",
-    "description": "Caminata hasta Cala Deià, con encanto de costa noroeste y paisajes de Tramuntana.",
+    "description": "A rewarding mountain trek through forested highlands, rugged ridges, and hidden valleys. The route offers solitude, wildlife spotting, and ever-changing views of the island’s interior. Hikers will pass through traditional stone walls, streams, and natural clearings, making this a perfect adventure for those seeking both challenge and peaceful immersion in nature.",
     "imageUrl": "images/treks/cala-deia.jpg",
     "municipality": "Deià",
     "meetings": [
@@ -1097,8 +1097,8 @@
   {
     "regNumber": "T20",
     "name": "Camí des Correu",
-    "description": "Camino histórico empedrado entre Valldemossa y la Serra, ideal para paisaje rural y bosque mediterráneo.",
-    "imageUrl": "images/treks/cami-correu.jpg",
+    "description": "A peaceful walk through wetlands rich in wildlife, where marshes, ponds, and reed beds create habitats for birds, amphibians, and aquatic plants. The trail is flat and easy, ideal for families and casual walkers, with multiple observation points, interpretive signs, and opportunities to enjoy serene sunrises or sunsets in a tranquil natural setting.",
+    "imageUrl": "images/treks/T19.jpg",
     "municipality": "Valldemossa",
     "meetings": [
       {

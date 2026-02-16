@@ -7,7 +7,6 @@ use App\Models\Meeting;
 use App\Models\Trek;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
 class MeetingController extends Controller
@@ -82,7 +81,7 @@ class MeetingController extends Controller
 
         $guide = User::query()->with('role')->findOrFail($data['user_id']);
         if ($guide->role?->name !== 'guia') {
-            return back()->withErrors(['user_id' => 'El guía principal debe tener rol guía.'])->withInput();
+            return back()->withErrors(['user_id' => 'Main guide must be have guide as role.'])->withInput();
         }
 
         $enrollmentDates = Meeting::enrollmentDatesForDay($data['day']);
@@ -98,7 +97,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $meeting)
-            ->with('status', 'Encuentro creado.');
+            ->with('status', 'Meeting created.');
     }
 
     // Vista de detalle de encuentro
@@ -117,10 +116,21 @@ class MeetingController extends Controller
         $extraGuides = $meeting->users->where('role.name', 'guia')->values();
         $attendees = $meeting->users->where('role.name', '!=', 'guia')->values();
 
+        // Paginación
+        $previous = Meeting::where('id', '>', $meeting->id) // previous = newer meeting
+            ->orderBy('id', 'asc') // el más próximo por arriba
+            ->first();
+
+        $next = Meeting::where('id', '<', $meeting->id) // next = older meeting
+            ->orderBy('id', 'desc') // el más próximo por debajo
+            ->first();
+
         return view('admin.meetings.show', [
             'meeting' => $meeting,
             'extraGuides' => $extraGuides,
             'attendees' => $attendees,
+            'previous' => $previous,
+            'next' => $next,
         ]);
     }
 
@@ -180,7 +190,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Encuentro actualizado.');
+            ->with('status', 'Meeting updated');
     }
 
     // Elimina un encuentro
@@ -190,7 +200,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.index')
-            ->with('status', 'Encuentro eliminado.');
+            ->with('status', 'Meeting deleted');
     }
 
     // Añade un guía adicional
@@ -204,7 +214,7 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Guía añadido.');
+            ->with('status', 'Guide added');
     }
 
     // Quita un guía adicional
@@ -214,6 +224,6 @@ class MeetingController extends Controller
 
         return redirect()
             ->route('admin.meetings.edit', $adminMeeting)
-            ->with('status', 'Guía eliminado.');
+            ->with('status', 'Guide deleted');
     }
 }

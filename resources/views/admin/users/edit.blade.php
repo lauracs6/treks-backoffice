@@ -6,7 +6,7 @@
             <div class="max-w-8xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-gray-900">Edit User</h1>
                 <a href="{{ route('admin.users.index') }}"
-                class="px-4 py-2 rounded-lg bg-sky-500 text-white text-s hover:bg-sky-300">
+                class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-300 shadow-lg shadow-gray-700">
                     Back to Users
                 </a>
             </div>

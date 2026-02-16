@@ -1,97 +1,148 @@
 <x-app-layout>
-    <div class="py-6 bg-gradient-to-br from-sky-50 via-cyan-50 to-white">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <x-flash-status class="mb-4" />
-            <div class="bg-white/90 border border-sky-100 shadow-sm sm:rounded-2xl">
-                <div class="p-6 text-slate-900">
-                    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-                        <form method="GET" action="{{ route('admin.treks.index') }}" class="flex flex-col gap-3 sm:flex-row sm:items-end sm:flex-1">
-                            <div class="w-full">
-                                <x-input-label for="q" value="Buscar" />
-                                <x-text-input id="q" name="q" type="text" class="mt-1 block w-full" value="{{ $search }}" placeholder="Nombre o código" />
-                            </div>
-                            <div class="flex gap-2">
-                                <x-primary-button type="submit">
-                                    Buscar
-                                </x-primary-button>
-                                @if($search !== '')
-                                    <a href="{{ route('admin.treks.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                                        Limpiar
-                                    </a>
-                                @endif
-                            </div>
-                        </form>
+    <div class="bg-white min-h-screen">
 
-                        <div>
-                            <a href="{{ route('admin.treks.create') }}" class="inline-flex items-center px-4 py-2 bg-slate-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-800">
-                                Nueva excursión
+        {{-- White header --}}
+        <div class="bg-white border-b border-gray-100 shadow-sm">
+            <div class="max-w-8xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-900">Treks List</h1>
+
+                <a href="{{ route('admin.treks.create') }}"
+                   class="px-4 py-2 bg-black text-white text-s font-semibold hover:bg-gray-600 shadow-lg shadow-gray-700">
+                    New trek
+                </a>
+            </div>
+        </div>        
+
+            {{-- White card container --}}
+            <div class="bg-white shadow-md border border-gray-100 p-6">
+
+                {{-- Filters --}}
+                <form method="GET" action="{{ route('admin.treks.index') }}"
+                      class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+
+                    {{-- Search --}}
+                    <div class="md:col-span-2">
+                        <x-input-label for="q" value="Search" />
+                        <x-text-input id="q" name="q" type="text"
+                            class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm"
+                            value="{{ $search }}"
+                            placeholder="Enter trek name" />
+                    </div>
+
+                    {{-- Island --}}
+                    <div>
+                        <x-input-label for="island" value="Island" />
+                        <select id="island" name="island"
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm">
+                            <option value="all">All</option>
+                            @foreach ($islands as $island)
+                                <option value="{{ $island->id }}" @selected($islandId == $island->id)>
+                                    {{ $island->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Municipality --}}
+                    <div>
+                        <x-input-label for="municipality" value="Municipality" />
+                        <select id="municipality" name="municipality"
+                                class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm">
+                            <option value="all">All</option>
+                            @foreach ($municipalities as $municipality)
+                                <option value="{{ $municipality->id }}" @selected($municipalityId == $municipality->id)>
+                                    {{ $municipality->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Buttons --}}
+                    <div class="md:col-span-4 flex gap-3">
+                        <x-primary-button class="bg-sky-500 hover:bg-sky-700 rounded-none shadow-lg shadow-gray-700">
+                            Search
+                        </x-primary-button>
+
+                        @if($search !== '' || $islandId !== 'all' || $municipalityId !== 'all')
+                            <a href="{{ route('admin.treks.index') }}"
+                               class="px-4 py-2 bg-black text-white text-sm font-medium hover:bg-gray-600 shadow-lg shadow-gray-700">
+                                Clear
                             </a>
-                        </div>
+                        @endif
                     </div>
+                </form>
 
-                    <div class="mt-6 overflow-x-auto">
-                        <table class="min-w-full text-sm">
-                            <thead class="text-left text-sky-900 bg-sky-50 border-b border-sky-100">
-                                <tr>
-                                    <th class="py-2 pr-4">Código</th>
-                                    <th class="py-2 pr-4">Nombre</th>
-                                    <th class="py-2 pr-4">Municipio</th>
-                                    <th class="py-2 pr-4">Isla</th>
-                                    <th class="py-2 pr-4">Estado</th>
-                                    <th class="py-2 pr-4">Lugares</th>
-                                    <th class="py-2 pr-4"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($treks as $trek)
-                                    <tr class="border-b">
-                                        <td class="py-2 pr-4">{{ $trek->regnumber }}</td>
-                                        <td class="py-2 pr-4">{{ $trek->name }}</td>
-                                        <td class="py-2 pr-4">{{ $trek->municipality?->name }}</td>
-                                        <td class="py-2 pr-4">{{ $trek->municipality?->island?->name ?? '-' }}</td>
-                                        <td class="py-2 pr-4">
+                {{-- Table --}}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-black border-b border-gray-100 text-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 text-left border border-gray-100">Registration</th>
+                                <th class="py-3 px-4 text-left border border-gray-100">Name</th>
+                                <th class="py-3 px-4 text-left border border-gray-100">Island</th>
+                                <th class="py-3 px-4 text-left border border-gray-100">Municipality</th>
+                                <th class="py-3 px-4 text-left border border-gray-100">Places</th>
+                                <th class="py-3 px-4 text-left border border-gray-100">Status</th>
+                                <th class="py-3 px-4 text-center border border-gray-100 w-40">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="divide-y divide-gray-100">
+                            @forelse($treks as $trek)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $trek->regnumber }}</td>
+                                    <td class="py-3 px-4 font-medium text-gray-900 border border-gray-100">{{ $trek->name }}</td>
+                                    <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $trek->municipality?->island?->name ?? '-' }}</td>
+                                    <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $trek->municipality?->name ?? '-' }}</td>
+                                    <td class="py-3 px-4 text-gray-600 border border-gray-100">{{ $trek->interesting_places_count }}</td>
+                                    <td class="py-3 px-4 border border-gray-100">
+                                        @if ($trek->status === 'y')
+                                            <span class="bg-gray-100 text-green-500 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                                        @else
+                                            <span class="bg-gray-100 text-red-500 px-3 py-1 rounded-full text-xs font-medium">Inactive</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-3 px-4 border border-gray-100 w-40">
+                                        <div class="flex justify-center gap-2">
+                                            <a href="{{ route('admin.treks.show', $trek->id) }}" class="px-3 py-1 bg-lime-400 hover:bg-lime-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">View</a>
+                                            <a href="{{ route('admin.treks.edit', $trek->id) }}" class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">Edit</a>
                                             @if ($trek->status === 'y')
-                                                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-green-700 bg-green-100 rounded-full">
-                                                    Activa
-                                                </span>
+                                                <form method="POST" action="{{ route('admin.treks.deactivate', $trek->id) }}" onsubmit="return confirm('Are you sure you want to deactivate this trek?');">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="px-3 py-1 bg-orange-600 hover:bg-red-400 text-white text-xs font-semibold shadow-sm shadow-gray-700">Deactivate</button>
+                                                </form>
                                             @else
-                                                <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-red-700 bg-red-100 rounded-full">
-                                                    Inactiva
-                                                </span>
+                                                <form method="POST" action="{{ route('admin.treks.activate', $trek->id) }}" onsubmit="return confirm('Are you sure you want to activate this trek?');">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="px-3 py-1 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-semibold shadow-sm shadow-gray-700">Activate</button>
+                                                </form>
                                             @endif
-                                        </td>
-                                        <td class="py-2 pr-4">{{ $trek->interesting_places_count }}</td>
-                                        <td class="py-2 pr-4 text-right">
-                                            <div class="inline-flex items-center gap-2">
-                                                <a href="{{ route('admin.treks.show', $trek->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-green-700 rounded-md hover:bg-green-600">
-                                                    Ver
-                                                </a>
-                                                <a href="{{ route('admin.treks.edit', $trek->id) }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-white bg-blue-900 rounded-md hover:bg-blue-800">
-                                                    Editar
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7" class="py-6 text-center text-gray-500">
-                                            No hay excursiones para mostrar.
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="mt-4 text-sm text-gray-500">
-                        Mostrando {{ $treks->firstItem() ?? 0 }} a {{ $treks->lastItem() ?? 0 }} de {{ $treks->total() }} resultados
-                    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="py-10 text-center text-gray-500">No treks to display.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
+
+                {{-- Results --}}
+                <div class="mt-6 text-sm text-gray-600 bg-gray-50 rounded-lg p-4 border border-gray-100 text-center">
+                    Showing {{ $treks->firstItem() ?? 0 }}
+                    to {{ $treks->lastItem() ?? 0 }}
+                    of {{ $treks->total() }} results
+                </div>
+
             </div>
 
-            <div class="mt-2 flex justify-end">
+            {{-- Pagination --}}
+            <div class="mt-4 mb-10 flex justify-center">
                 {{ $treks->links('admin.pagination') }}
-            </div>
-        </div>
+            </div>        
     </div>
 </x-app-layout>

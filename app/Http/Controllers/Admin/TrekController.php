@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\InterestingPlace;
 use App\Models\Municipality;
 use App\Models\Trek;
+use App\Models\Island;
 use App\Services\TrekImageService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -16,30 +17,43 @@ class TrekController extends Controller
     {
     }
 
-    // Listado de excursiones con búsqueda básica
+    // Listado de excursiones con búsqueda y filtros
     public function index(Request $request)
     {
-        $search = trim((string) $request->query('q'));
+        $search = $request->get('q', '');
+        $islandId = $request->get('island', 'all');
+        $municipalityId = $request->get('municipality', 'all');
 
-        $treks = Trek::query()
-            ->with('municipality.island')
+        $treks = Trek::with('municipality.island')
             ->withCount('interestingPlaces')
             ->when($search !== '', function ($query) use ($search) {
-                $query->where(function ($subQuery) use ($search) {
-                    $subQuery
-                        ->where('name', 'like', "%{$search}%")
-                        ->orWhere('regnumber', 'like', "%{$search}%");
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($islandId !== 'all', function ($query) use ($islandId) {
+                $query->whereHas('municipality.island', function ($q) use ($islandId) {
+                    $q->where('id', $islandId);
                 });
             })
-            ->orderBy('regnumber')
-            ->paginate(20)
+            ->when($municipalityId !== 'all', function ($query) use ($municipalityId) {
+                $query->where('municipality_id', $municipalityId);
+            })
+            ->orderBy('regnumber', 'asc')
+            ->paginate(10)
             ->withQueryString();
 
-        return view('admin.treks.index', [
-            'treks' => $treks,
-            'search' => $search,
-        ]);
+        $islands = Island::orderBy('name')->get();
+        $municipalities = Municipality::orderBy('name')->get();
+
+        return view('admin.treks.index', compact(
+            'treks',
+            'search',
+            'islandId',
+            'municipalityId',
+            'islands',
+            'municipalities'
+        ));
     }
+
 
     // Formulario de creación de excursión
     public function create()
@@ -54,11 +68,15 @@ class TrekController extends Controller
             ->orderBy('name')
             ->get();
 
+        // empty collection for Alpine.js
+        $selectedPlacesData = collect([]);
+
         return view('admin.treks.create', [
             'trek' => new Trek(),
             'municipalities' => $municipalities,
             'interestingPlaces' => $interestingPlaces,
             'selectedPlaces' => [],
+            'selectedPlacesData' => $selectedPlacesData, // <-- add this
         ]);
     }
 
@@ -98,7 +116,7 @@ class TrekController extends Controller
 
         return redirect()
             ->route('admin.treks.edit', $trek)
-            ->with('status', 'Excursión creada.');
+            ->with('status', 'Trek created');
     }
 
     // Vista de detalle de excursión
@@ -115,9 +133,10 @@ class TrekController extends Controller
                 ->orderByDesc('hour'),
         ]);
 
-        return view('admin.treks.show', [
-            'trek' => $trek,
-        ]);
+        $previous = Trek::where('regnumber', '<', $trek->regnumber)->orderBy('regnumber', 'desc')->first();
+        $next = Trek::where('regnumber', '>', $trek->regnumber)->orderBy('regnumber', 'asc')->first();
+
+        return view('admin.treks.show', compact('trek', 'previous', 'next'));
     }
 
     // Formulario de edición de excursión
@@ -140,13 +159,25 @@ class TrekController extends Controller
             ->pluck('pivot.order', 'id')
             ->toArray();
 
+        // Preparar datos para Blade y Alpine.js
+        $selectedPlacesData = collect($selectedPlaces)->map(function($order, $placeId) use ($interestingPlaces) {
+            $place = $interestingPlaces->firstWhere('id', $placeId);
+            return [
+                'id' => $placeId,
+                'name' => $place->name,
+                'order' => $order
+            ];
+        })->values();
+
         return view('admin.treks.edit', [
             'trek' => $adminTrek,
             'municipalities' => $municipalities,
             'interestingPlaces' => $interestingPlaces,
             'selectedPlaces' => $selectedPlaces,
+            'selectedPlacesData' => $selectedPlacesData,
         ]);
     }
+
 
     // Actualiza una excursión existente
     public function update(Request $request, Trek $adminTrek)
@@ -187,7 +218,7 @@ class TrekController extends Controller
 
         return redirect()
             ->route('admin.treks.edit', $adminTrek)
-            ->with('status', 'Excursión actualizada.');
+            ->with('status', 'Trek updated');
     }
 
     // Elimina una excursión
@@ -208,5 +239,25 @@ class TrekController extends Controller
 
         return $syncData;
     }
+
+    //Activar o desactivar un trek
+    public function deactivate(Trek $trek)
+    {
+        $trek->update(['status' => 'n']);
+
+        return redirect()
+            ->route('admin.treks.index')
+            ->with('success', 'Trek deactivated successfully.');
+    }
+
+    public function activate(Trek $trek)
+    {
+        $trek->update(['status' => 'y']);
+
+        return redirect()
+            ->route('admin.treks.index')
+            ->with('success', 'Trek activated successfully.');
+    }
+
 
 }

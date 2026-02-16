@@ -6,9 +6,7 @@
             <div class="max-w-8xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                 <h1 class="text-2xl font-bold text-gray-900">Users List</h1>
             </div>
-        </div>
-
-        
+        </div>        
 
             {{-- White card container --}}
             <div class="bg-white shadow-md border border-gray-100 p-6">

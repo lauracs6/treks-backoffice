@@ -33,7 +33,7 @@ class TrekSeeder extends Seeder
             $municipioNombre = $trekData['municipality'];
             $municipioId     = $municipiosPorNombre->get($municipioNombre);
 
-            $trek = Trek::firstOrCreate(
+            $trek = Trek::updateOrCreate(
                 ['regnumber' => $trekData['regNumber']],
                 [
                     'name'            => $trekData['name'],

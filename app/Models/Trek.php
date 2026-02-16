@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Trek extends Model
 {
@@ -35,15 +34,22 @@ class Trek extends Model
 
     public function getImageDisplayUrlAttribute(): ?string
     {
-        $imageUrl = $this->imageUrl;
-        if (! is_string($imageUrl) || $imageUrl === '') {
+        $regnumber = $this->regnumber;
+        
+        if (!$regnumber) {
             return null;
         }
-
-        if (Str::startsWith($imageUrl, ['http://', 'https://'])) {
-            return $imageUrl;
+        
+        // Extensiones posibles
+        $extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        
+        foreach ($extensions as $ext) {
+            $imagePath = 'images/treks/' . $regnumber . '.' . $ext;
+            if (file_exists(public_path($imagePath))) {
+                return asset($imagePath);
+            }
         }
-
-        return asset(ltrim($imageUrl, '/'));
+        
+        return null;
     }
 }

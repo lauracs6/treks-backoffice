@@ -74,6 +74,14 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/treks/{admin_trek}', [AdminTrekController::class, 'update'])
             ->whereNumber('admin_trek')
             ->name('treks.update');
+        Route::patch('/treks/{trek}/deactivate', [AdminTrekController::class, 'deactivate'])
+            ->whereNumber('trek')
+            ->name('treks.deactivate');
+        Route::patch('/treks/{trek}/activate', [AdminTrekController::class, 'activate'])
+            ->whereNumber('trek')
+            ->name('treks.activate');
+            
+
 
         // Encuentros (listado + CRUD)
         Route::get('/meetings', [AdminMeetingController::class, 'index'])->name('meetings.index');

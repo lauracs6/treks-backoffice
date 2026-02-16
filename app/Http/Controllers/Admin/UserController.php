@@ -68,9 +68,21 @@ class UserController extends Controller
             ->orderByDesc('hour')
             ->get();
 
+        // Usuario con id menor → Previous (más antiguo)
+        $previous = User::where('id', '<', $user->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Usuario con id mayor → Next (más reciente)
+        $next = User::where('id', '>', $user->id)
+            ->orderBy('id', 'asc')
+            ->first();
+
         return view('admin.users.show', [
             'user' => $user,
             'createdMeetings' => $createdMeetings,
+            'previous' => $previous,
+            'next' => $next
         ]);
     }
 
