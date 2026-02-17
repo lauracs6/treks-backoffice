@@ -1,38 +1,40 @@
 <x-app-layout>
-    <div class="py-6 bg-gradient-to-br from-lime-50 via-emerald-50 to-white">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-4 flex justify-between items-center bg-white/90 border border-lime-100 shadow-sm sm:rounded-2xl px-5 py-4">
-                <div>
-                    <span class="inline-flex items-center px-2.5 py-0.5 text-xs font-semibold uppercase tracking-widest text-lime-700 bg-lime-100 rounded-full">Municipio</span>
-                    <h2 class="mt-2 font-semibold text-xl text-gray-800 leading-tight">Editar municipio</h2>
-                </div>
-                <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-200">
-                    Volver
+    <div class="bg-white min-h-screen">
+
+        {{-- Header --}}
+        <div class="bg-white border-b border-gray-100 shadow-sm">
+            <div class="max-w-8xl mx-auto py-4 px-4 flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-900">Edit Municipality</h1>
+
+                <a href="{{ route('admin.municipalities.index') }}"
+                   class="px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
+                    Back
                 </a>
             </div>
+        </div>
 
-            <div class="bg-white/90 border border-lime-100 shadow-sm sm:rounded-2xl">
-                <div class="p-6 text-slate-900">
-                    <form method="POST" action="{{ route('admin.municipalities.update', $municipality->id) }}" class="space-y-6">
-                        @csrf
-                        @method('PATCH')
+        {{-- Form --}}
+        <div class="max-w-4xl mx-auto px-8 mt-10">
+            
 
-                        @include('admin.municipalities.form', [
-                            'municipality' => $municipality,
-                        ])
+            <form method="POST" action="{{ route('admin.municipalities.update', $municipality->id) }}" class="space-y-6">
+                @csrf
+                @method('PATCH')
 
-                        <div class="flex items-center gap-3">
-                            <x-primary-button type="submit">
-                                Guardar cambios
-                            </x-primary-button>
-                            <a href="{{ route('admin.municipalities.index') }}" class="inline-flex items-center px-3 py-1.5 text-xs font-semibold uppercase tracking-widest text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200">
-                                Volver a la lista
-                            </a>
-                        </div>
-                    </form>
+                @include('admin.municipalities.form', ['municipality' => $municipality])
 
+                <div class="flex justify-center gap-3">
+                    <button type="submit" class="px-4 py-2 bg-sky-500 text-white hover:bg-sky-700 shadow-lg shadow-gray-700">
+                        Save
+                    </button>
+                    <a href="{{ route('admin.municipalities.index') }}"
+                        class="px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        Back
+                    </a>
                 </div>
-            </div>
+            </form>
+
+            
         </div>
     </div>
 </x-app-layout>
