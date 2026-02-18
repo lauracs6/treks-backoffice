@@ -1,11 +1,15 @@
-# 📌 BalearTrek API
-**Base de datos · API REST · Seeders · Triggers · Autenticación**
+# BalearTrek API
 
-BalearTrek es una plataforma dedicada a la gestión de **excursiones (treks), encuentros (meetings), participantes, lugares remarcables y comentarios**. Este repositorio agrupa tanto la **capa de datos** como la **API REST** del proyecto.
+· Base de datos 
+· API REST 
+· Seeders 
+· Triggers 
+· Autenticación
 
----
+BalearTrek es una plataforma dedicada a la gestión de **excursiones (treks), encuentros (meetings), usuarios, lugares interesantes y comentarios**.
 
-## 📌 1. Configuración necesaria (JSON de seeders)
+
+## 1. Configuración necesaria (JSON de seeders)
 
 Los seeders leen los JSON desde una ruta interna del proyecto:
 
@@ -13,18 +17,16 @@ Los seeders leen los JSON desde una ruta interna del proyecto:
 database/seeders/data/
 ```
 
----
 
-## 📌 2. Cómo cargan los seeders los JSON
+## 2. Cómo cargan los seeders los JSON
 
 ```php
 $jsonData = File::get(database_path('seeders/data/treks.json'));
 $data = json_decode($jsonData, true);
 ```
 
----
 
-## 📌 3. Instalación y ejecución del proyecto
+## 3. Instalación y ejecución del proyecto
 
 ```bash
 composer install
@@ -33,11 +35,10 @@ php artisan migrate:fresh --seed
 php artisan serve
 ```
 
----
 
-## 📌 4. Capa de datos (modelo, migraciones, seeders y triggers)
+## 4. Capa de datos (modelo, migraciones, seeders y triggers)
 
-### 🧱 Migraciones
+### Migraciones
 - users, roles  
 - treks  
 - meetings  
@@ -47,7 +48,7 @@ php artisan serve
 - municipalities, islands, zones  
 - meeting_user (pivot)
 
-### 🌱 Seeders
+### Seeders
 Orden ejecutado por `DatabaseSeeder`:
 
 1. RoleSeeder  
@@ -61,26 +62,25 @@ Orden ejecutado por `DatabaseSeeder`:
 9. MeetingUserSeeder  
 10. ImageFactory (1000 imágenes)
 
-### 🧩 Factories
+### Factories
 - UserFactory  
 - ImageFactory  
 
-### 🗂️ Modelos y relaciones
+### Modelos y relaciones
 Relaciones 1:N y N:N definidas según el modelo ER del proyecto.
 
-### 🔹 Triggers sobre `comments`
+### Triggers sobre `comments`
 Actualizan:
 - meetings.totalScore  
 - meetings.countScore  
 
-### 🔹 Triggers sobre `meetings`
+### Triggers sobre `meetings`
 Actualizan:
 - treks.totalScore  
 - treks.countScore  
 
----
 
-## 📌 5. Estructura esperada de los JSON
+## 5. Estructura esperada de los JSON
 
 ### users.json
 ```json
@@ -102,30 +102,28 @@ Incluye treks, meetings y comments.
 ### places.json
 Incluye place_types, interesting_places y place_trek.
 
----
 
-## 📌 6. API REST (lo implementado)
+## 6. API REST
 
-### ✅ Autenticación
+### Autenticación
 - **Por credenciales**: register, login, logout (Sanctum).
 - **Por API-KEY**: header `API-KEY` con el valor de `APP_KEY`.
 
-### ✅ Middlewares
+### Middlewares
 - `auth.or.api.key` (Sanctum o API-KEY).
 - `check.role.admin` (solo administradores).
 
-### ✅ Route model binding personalizado
+### Route model binding personalizado
 - **Users**: `{user}` acepta **ID** o **email**.
 - **Treks**: `{trek}` acepta **ID** o **regNumber**.
 
-### ✅ Requests y Resources
+### Requests y Resources
 - Requests: `UserUpdateRequest`, `UserDestroyRequest`, `TrekStoreRequest`, `LoginRequest`.
 - Resources: `UserResource`, `UserSummaryResource`, `TrekResource`, `MeetingResource`, `CommentResource`,
   `MunicipalityResource`, `PlaceTypeResource`, `InterestingPlaceResource`.
 
----
 
-## 📌 7. Endpoints principales
+## 7. Endpoints principales
 
 Base URL típica: `http://127.0.0.1:8000/api`
 
@@ -148,69 +146,21 @@ Base URL típica: `http://127.0.0.1:8000/api`
 - `GET /treks/{trek}`
 - `POST /treks` (admin)
 
----
 
-## 📌 8. Mini documentación de uso
+## 8. Mini documentación de uso
 
-### 🔹 Autenticación con token Sanctum
+### Autenticación con token Sanctum
 1. `POST /login`
 2. Usar `Authorization: Bearer <token>` en las rutas protegidas.
 
-### 🔹 Autenticación con API-KEY
+### Autenticación con API-KEY
 En cualquier ruta protegida, enviar:
 ```
 API-KEY: <APP_KEY>
 ```
 
-### 🔹 Filtros
+### Filtros
 - `GET /treks?illa=Mallorca` o `GET /treks?island_id=1`
 
-### 🔹 Updates parciales de usuario
+### Updates parciales de usuario
 `PUT /user` acepta solo los campos que quieras modificar.
-
----
-
-## 📂 9. Estructura del proyecto
-
-```
-database/
-│── migrations/
-│── seeders/
-│   │── data/
-│── factories/
-app/
-│── Models/
-│── Http/Controllers/
-│── Http/Requests/
-│── Http/Resources/
-│── Http/Middleware/
-routes/
-│── api.php
-```
-
----
-
-## 📌 10. Estado actual del proyecto
-
-| Área | Estado |
-|------|--------|
-| Base de datos | ✔️ Completada |
-| API REST | ✔️ Completada |
-| Dashboard de la API | ⏳ Pendiente |
-| Frontend (React + Vite) | ⏳ Pendiente |
-
----
-
-## 📖 11. Resumen técnico final
-
-✔ Migraciones completas  
-✔ Seeders basados en JSON  
-✔ Factories masivas  
-✔ Triggers automáticos  
-✔ Carga reproducible  
-✔ API REST con Sanctum + API-KEY  
-✔ Requests + Resources  
-✔ Route model binding personalizado  
-✔ Filtros y permisos por rol  
-
----
