@@ -19,8 +19,8 @@
 
             {{-- Filters --}}
             <form method="GET"
-                  action="{{ route('admin.municipalities.index') }}"
-                  class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                action="{{ route('admin.municipalities.index') }}"
+                class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
 
                 <div class="md:col-span-2">
                     <x-input-label for="q" value="Search" />
@@ -30,19 +30,47 @@
                         placeholder="Municipality name" />
                 </div>
 
-                <div class="flex items-end gap-3">
-                    <button class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-700 shadow-lg shadow-gray-700">
+                <div>
+                    <x-input-label for="zone" value="Zone" />
+                    <select name="zone" id="zone"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm">
+                        <option value="all" @selected($zone === 'all')>All</option>
+                        @foreach($zones as $z)
+                            <option value="{{ $z->id }}" @selected((string)$zone === (string)$z->id)>
+                                {{ $z->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <x-input-label for="island" value="Island" />
+                    <select name="island" id="island"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm">
+                        <option value="all" @selected($island === 'all')>All</option>
+                        @foreach($islands as $i)
+                            <option value="{{ $i->id }}" @selected((string)$island === (string)$i->id)>
+                                {{ $i->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="md:col-span-4 flex gap-3">
+                    <button class="px-4 py-2 bg-sky-500 text-white hover:bg-sky-700 shadow-lg shadow-gray-700">
                         Search
                     </button>
 
-                    @if($search !== '')
+                    @if($search !== '' || $zone !== 'all' || $island !== 'all')
                         <a href="{{ route('admin.municipalities.index') }}"
-                           class="px-4 py-2 bg-black text-white text-s hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        class="px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
                             Clear
                         </a>
                     @endif
                 </div>
+
             </form>
+
 
             {{-- Table --}}
             <div class="overflow-x-auto">

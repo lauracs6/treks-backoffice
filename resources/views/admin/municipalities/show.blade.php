@@ -47,6 +47,34 @@
                 @endforelse
             </div>
 
+            {{-- Municipality Pagination --}}
+            <div class="mt-6 mb-10 flex justify-center gap-4">
+
+                @if($previous)
+                    <a href="{{ route('admin.municipalities.show', $previous->id) }}"
+                    class="px-4 py-2 bg-black text-white shadow-lg shadow-gray-700 hover:bg-gray-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Previous
+                    </a>
+                @endif
+
+                @if($next)
+                    <a href="{{ route('admin.municipalities.show', $next->id) }}"
+                    class="px-4 py-2 bg-black text-white shadow-lg shadow-gray-700 hover:bg-gray-700 flex items-center">
+                        Next
+                        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                @endif
+
+            </div>
         </div>
     </div>
 </x-app-layout>

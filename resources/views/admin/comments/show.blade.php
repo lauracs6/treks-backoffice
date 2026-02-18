@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="max-w-8xl mx-auto px-8 mt-10 space-y-4">
+        <div class="max-w-8xl mx-auto px-8 mt-10 mb-10 space-y-4">
 
             {{-- Comment details --}}
             
@@ -52,6 +52,31 @@
                         <p class="text-gray-500">No images available.</p>
                     @endforelse
                 </div>
+            </div>
+
+            {{-- Comment navigation --}}
+            <div class="mt-8 px-6 flex justify-center gap-4">
+
+                @if($previous)
+                    <a href="{{ route('admin.comments.show', $previous->id) }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Previous
+                    </a>
+                @endif
+
+                @if($next)
+                    <a href="{{ route('admin.comments.show', $next->id) }}"
+                    class="inline-flex items-center gap-2 px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
+                        Next
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                @endif
+
             </div>
 
         </div>

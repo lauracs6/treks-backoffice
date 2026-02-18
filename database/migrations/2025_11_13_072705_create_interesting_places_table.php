@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('gps')->unique();
             $table->string('name');
             $table->foreignId('place_type_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->string('status', 1)->default('y');
             $table->timestamps();
         });
     }

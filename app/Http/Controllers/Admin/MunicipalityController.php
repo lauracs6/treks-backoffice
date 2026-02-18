@@ -11,15 +11,26 @@ use Illuminate\Validation\Rule;
 
 class MunicipalityController extends Controller
 {
-    // Listado de municipios con búsqueda básica
+    // Listado de municipios con búsqueda + filtros
     public function index(Request $request)
     {
         $search = trim((string) $request->query('q'));
+        $zone = $request->query('zone', 'all');
+        $island = $request->query('island', 'all');
+
+        $zones = Zone::query()->orderBy('name')->get();
+        $islands = Island::query()->orderBy('name')->get();
 
         $municipalities = Municipality::query()
             ->with(['island', 'zone'])
             ->when($search !== '', function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%");
+            })
+            ->when($zone !== 'all', function ($query) use ($zone) {
+                $query->where('zone_id', $zone);
+            })
+            ->when($island !== 'all', function ($query) use ($island) {
+                $query->where('island_id', $island);
             })
             ->orderBy('name')
             ->paginate(20)
@@ -28,8 +39,41 @@ class MunicipalityController extends Controller
         return view('admin.municipalities.index', [
             'municipalities' => $municipalities,
             'search' => $search,
+            'zone' => $zone,
+            'island' => $island,
+            'zones' => $zones,
+            'islands' => $islands,
         ]);
     }
+
+    // Vista de detalle de municipio
+    public function show(Municipality $adminMunicipality)
+    {
+        $municipality = $adminMunicipality->load([
+            'zone',
+            'island',
+            'treks' => fn ($query) => $query
+                ->withCount('meetings')
+                ->orderBy('regnumber'),
+        ]);
+
+        // previous por id
+        $previous = Municipality::where('id', '<', $municipality->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // next por id
+        $next = Municipality::where('id', '>', $municipality->id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        return view('admin.municipalities.show', [
+            'municipality' => $municipality,
+            'previous' => $previous,
+            'next' => $next,
+        ]);
+    }
+
 
     // Formulario de creación de municipio
     public function create()
@@ -62,22 +106,6 @@ class MunicipalityController extends Controller
         return redirect()
             ->route('admin.municipalities.index')
             ->with('status', 'Municipio creado.');
-    }
-
-    // Vista de detalle de municipio
-    public function show(Municipality $adminMunicipality)
-    {
-        $municipality = $adminMunicipality->load([
-            'zone',
-            'island',
-            'treks' => fn ($query) => $query
-                ->withCount('meetings')
-                ->orderBy('regnumber'),
-        ]);
-
-        return view('admin.municipalities.show', [
-            'municipality' => $municipality,
-        ]);
     }
 
     // Formulario de edición de municipio

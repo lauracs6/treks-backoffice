@@ -49,7 +49,7 @@ Route::middleware(['auth', 'check.role.admin'])
             ->whereNumber('admin_user')
             ->name('users.activate');
 
-        // Comentarios (validación)
+        // Comentarios
         Route::get('/comments', [AdminCommentController::class, 'index'])->name('comments.index');
         Route::get('/comments/{admin_comment}', [AdminCommentController::class, 'show'])
             ->whereNumber('admin_comment')
@@ -60,6 +60,8 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/comments/{admin_comment}', [AdminCommentController::class, 'update'])
             ->whereNumber('admin_comment')
             ->name('comments.update');
+        Route::patch('comments/{admin_comment}/deactivate', [AdminCommentController::class, 'deactivate'])->name('comments.deactivate');
+        Route::patch('comments/{admin_comment}/activate', [AdminCommentController::class, 'activate'])->name('comments.activate');
 
         // Excursiones (CRUD)
         Route::get('/treks', [AdminTrekController::class, 'index'])->name('treks.index');
@@ -79,11 +81,11 @@ Route::middleware(['auth', 'check.role.admin'])
             ->name('treks.deactivate');
         Route::patch('/treks/{trek}/activate', [AdminTrekController::class, 'activate'])
             ->whereNumber('trek')
-            ->name('treks.activate');
-            
+            ->name('treks.activate');   
+           
 
 
-        // Encuentros (listado + CRUD)
+        // Meetings (CRUD)
         Route::get('/meetings', [AdminMeetingController::class, 'index'])->name('meetings.index');
         Route::get('/meetings/create', [AdminMeetingController::class, 'create'])->name('meetings.create');
         Route::post('/meetings', [AdminMeetingController::class, 'store'])->name('meetings.store');
@@ -121,7 +123,7 @@ Route::middleware(['auth', 'check.role.admin'])
             ->whereNumber('admin_municipality')
             ->name('municipalities.update');
 
-        // Lugares remarcables (CRUD)
+        // Places (CRUD)
         Route::get('/places', [AdminInterestingPlaceController::class, 'index'])->name('places.index');
         Route::get('/places/create', [AdminInterestingPlaceController::class, 'create'])->name('places.create');
         Route::post('/places', [AdminInterestingPlaceController::class, 'store'])->name('places.store');
@@ -134,9 +136,11 @@ Route::middleware(['auth', 'check.role.admin'])
         Route::patch('/places/{admin_place}', [AdminInterestingPlaceController::class, 'update'])
             ->whereNumber('admin_place')
             ->name('places.update');
-        Route::delete('/places/{admin_place}', [AdminInterestingPlaceController::class, 'destroy'])
-            ->whereNumber('admin_place')
-            ->name('places.destroy');
+        Route::patch('places/{admin_place}/deactivate', [AdminInterestingPlaceController::class, 'deactivate'])->name('places.deactivate');
+        Route::patch('places/{admin_place}/activate', [AdminInterestingPlaceController::class, 'activate'])->name('places.activate');
+        Route::delete('admin/places/{admin_place}', [AdminInterestingPlaceController::class, 'destroy'])->name('places.destroy');
+
+
     });
 
 // Rutas de autenticación Breeze

@@ -112,7 +112,7 @@
                                         @endif
                                     </td>
 
-                                    {{-- Botones centrados y columna más estrecha --}}
+                                    {{-- Botones --}}
                                     <td class="py-3 px-4 border border-gray-100 w-32">
                                         <div class="flex justify-center gap-2">
                                             @if ($isAdminUser)

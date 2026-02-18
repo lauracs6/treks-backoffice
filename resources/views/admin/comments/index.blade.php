@@ -13,25 +13,25 @@
             <x-flash-status class="mb-4" />
 
             {{-- Filters --}}
-            <form method="GET" action="{{ route('admin.comments.index') }}" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <form method="GET" action="{{ route('admin.comments.index') }}" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 {{-- Status Tabs --}}
-                <div class="md:col-span-2 flex flex-wrap gap-2 items-center">
-                    <a href="{{ route('admin.comments.index', ['status' => 'pending', 'trek_id' => $trekId]) }}"
+                <div class="md:col-span-4 flex flex-wrap gap-2 items-center mb-2">
+                    <a href="{{ route('admin.comments.index', ['status' => 'pending', 'trek_id' => $trekId, 'score' => $score, 'q' => $search]) }}"
                        class="px-3 py-2 text-sm font-medium {{ $status === 'pending' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                         Pending
                     </a>
-                    <a href="{{ route('admin.comments.index', ['status' => 'all', 'trek_id' => $trekId]) }}"
+                    <a href="{{ route('admin.comments.index', ['status' => 'all', 'trek_id' => $trekId, 'score' => $score, 'q' => $search]) }}"
                        class="px-3 py-2 text-sm font-medium {{ $status === 'all' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                         All
                     </a>
-                    <a href="{{ route('admin.comments.index', ['status' => 'approved', 'trek_id' => $trekId]) }}"
+                    <a href="{{ route('admin.comments.index', ['status' => 'approved', 'trek_id' => $trekId, 'score' => $score, 'q' => $search]) }}"
                        class="px-3 py-2 text-sm font-medium {{ $status === 'approved' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-700' }}">
                         Approved
                     </a>                    
                 </div>
 
                 {{-- Trek Filter --}}
-                <div class="flex items-center gap-3">
+                <div>
                     <input type="hidden" name="status" value="{{ $status }}">
                     <x-input-label for="trek_id" value="Trek" />
                     <select id="trek_id" name="trek_id"
@@ -43,14 +43,40 @@
                             </option>
                         @endforeach
                     </select>
+                </div>
 
+                {{-- User Search --}}
+                <div>
+                    <x-input-label for="q" value="User search" />
+                    <x-text-input id="q" name="q" type="text"
+                        value="{{ $search }}"
+                        class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm"
+                        placeholder="Name or lastname" />
+                </div>
+
+                {{-- Score Filter --}}
+                <div>
+                    <x-input-label for="score" value="Score" />
+                    <select id="score" name="score"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                        <option value="all">All</option>
+                        @for($i=1;$i<=5;$i++)
+                            <option value="{{ $i }}" @selected((string)$score === (string)$i)>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+
+                {{-- Buttons --}}
+                <div class="flex items-end gap-3">
                     <button type="submit" class="px-4 py-2 bg-sky-500 text-white text-s hover:bg-sky-700 shadow-lg shadow-gray-700">
-                        Filter
+                        Search
                     </button>
 
-                    @if ($trekId !== 'all')
-                        <a href="{{ route('admin.comments.index', ['status' => $status]) }}"
-                           class="px-4 py-2 bg-black text-white text-s hover:bg-gray-700 shadow-lg shadow-gray-700">
+                    @if ($trekId !== 'all' || $score !== 'all' || $search !== '')
+                        <a href="{{ route('admin.comments.index') }}"
+                           class="px-4 py-2 bg-black text-white hover:bg-gray-700 shadow-lg shadow-gray-700">
                             Clear
                         </a>
                     @endif
@@ -113,6 +139,27 @@
                                        class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
                                         Edit
                                     </a>
+
+                                    @if ($comment->status === 'y')
+                                        <form method="POST" action="{{ route('admin.comments.deactivate', $comment->id) }}" onsubmit="return confirm('Are you sure you want to deactivate this comment?');">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                class="px-3 py-1 bg-red-500 hover:bg-red-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
+                                                Disapprove
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form method="POST" action="{{ route('admin.comments.activate', $comment->id) }}" onsubmit="return confirm('Are you sure you want to activate this comment?');">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit"
+                                                class="px-3 py-1 bg-emerald-500 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
+                                                Approve
+                                            </button>
+                                        </form>
+                                    @endif
+                                
                                 </div>
                             </td>
                         </tr>
