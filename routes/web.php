@@ -132,12 +132,7 @@ Route::middleware(['auth', 'check.role.admin'])
             ->name('places.edit');
         Route::patch('/places/{admin_place}', [AdminInterestingPlaceController::class, 'update'])
             ->whereNumber('admin_place')
-            ->name('places.update');
-        Route::patch('places/{admin_place}/deactivate', [AdminInterestingPlaceController::class, 'deactivate'])->name('places.deactivate');
-        Route::patch('places/{admin_place}/activate', [AdminInterestingPlaceController::class, 'activate'])->name('places.activate');
-        Route::delete('admin/places/{admin_place}', [AdminInterestingPlaceController::class, 'destroy'])->name('places.destroy');
-
-
+            ->name('places.update'); 
     });
 
 // Rutas de autenticación Breeze
