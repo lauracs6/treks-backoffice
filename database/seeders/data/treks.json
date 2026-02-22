@@ -927,7 +927,7 @@
     "regNumber": "T17",
     "name": "Ruta de Formentor",
     "description": "A historic climb to a medieval castle perched atop a hill, offering sweeping island views and a journey through centuries-old paths. The trek combines moderate uphill sections with cultural exploration, passing ancient walls, lookout points, and scenic stops along the way. Ideal for history enthusiasts and those who enjoy combining adventure with cultural discovery.",
-    "imageUrl": "images/treks/T17.png",
+    "imageUrl": "images/treks/T17.jpg",
     "municipality": "Pollença",
     "meetings": [
       {
@@ -1041,7 +1041,7 @@
     "regNumber": "T19",
     "name": "Ruta de Cala Deià",
     "description": "A rewarding mountain trek through forested highlands, rugged ridges, and hidden valleys. The route offers solitude, wildlife spotting, and ever-changing views of the island’s interior. Hikers will pass through traditional stone walls, streams, and natural clearings, making this a perfect adventure for those seeking both challenge and peaceful immersion in nature.",
-    "imageUrl": "images/treks/cala-deia.jpg",
+    "imageUrl": "images/treks/T19.jpg",
     "municipality": "Deià",
     "meetings": [
       {
@@ -1098,7 +1098,7 @@
     "regNumber": "T20",
     "name": "Camí des Correu",
     "description": "A peaceful walk through wetlands rich in wildlife, where marshes, ponds, and reed beds create habitats for birds, amphibians, and aquatic plants. The trail is flat and easy, ideal for families and casual walkers, with multiple observation points, interpretive signs, and opportunities to enjoy serene sunrises or sunsets in a tranquil natural setting.",
-    "imageUrl": "images/treks/T19.jpg",
+    "imageUrl": "images/treks/T20.jpg",
     "municipality": "Valldemossa",
     "meetings": [
       {
