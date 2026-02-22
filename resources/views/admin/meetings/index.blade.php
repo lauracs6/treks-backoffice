@@ -104,14 +104,7 @@
                             <td class="py-3 px-4 border border-gray-100 w-40">
                                 <div class="flex justify-center gap-2">
                                     <a href="{{ route('admin.meetings.show', $meeting->id) }}" class="px-3 py-1 bg-lime-400 hover:bg-lime-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">View</a>
-                                    <a href="{{ route('admin.meetings.edit', $meeting->id) }}" class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">Edit</a>
-                                    <form method="POST" action="{{ route('admin.meetings.destroy', $meeting->id) }}" onsubmit="return confirm('Are you sure you want to delete this meeting?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="px-3 py-1 bg-red-600 hover:bg-red-400 text-white text-xs font-semibold shadow-sm shadow-gray-700">
-                                            Delete
-                                        </button>
-                                    </form>
+                                    <a href="{{ route('admin.meetings.edit', $meeting->id) }}" class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">Edit</a>                                    
                                 </div>
                             </td>
                         </tr>

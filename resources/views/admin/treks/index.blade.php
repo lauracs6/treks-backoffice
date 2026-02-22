@@ -110,7 +110,7 @@
                                                 <form method="POST" action="{{ route('admin.treks.deactivate', $trek->id) }}" onsubmit="return confirm('Are you sure you want to deactivate this trek?');">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="px-3 py-1 bg-orange-600 hover:bg-red-400 text-white text-xs font-semibold shadow-sm shadow-gray-700">Deactivate</button>
+                                                    <button type="submit" class="px-3 py-1 bg-red-500 hover:bg-red-400 text-white text-xs font-semibold shadow-sm shadow-gray-700">Deactivate</button>
                                                 </form>
                                             @else
                                                 <form method="POST" action="{{ route('admin.treks.activate', $trek->id) }}" onsubmit="return confirm('Are you sure you want to activate this trek?');">

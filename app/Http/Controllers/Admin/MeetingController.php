@@ -193,16 +193,6 @@ class MeetingController extends Controller
             ->with('status', 'Meeting updated');
     }
 
-    // Elimina un encuentro
-    public function destroy(Meeting $adminMeeting)
-    {
-        $adminMeeting->delete();
-
-        return redirect()
-            ->route('admin.meetings.index')
-            ->with('status', 'Meeting deleted');
-    }
-
     // Añade un guía adicional
     public function addGuide(Request $request, Meeting $adminMeeting)
     {

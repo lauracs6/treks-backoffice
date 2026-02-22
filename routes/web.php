@@ -97,10 +97,7 @@ Route::middleware(['auth', 'check.role.admin'])
             ->name('meetings.edit');
         Route::patch('/meetings/{admin_meeting}', [AdminMeetingController::class, 'update'])
             ->whereNumber('admin_meeting')
-            ->name('meetings.update');
-        Route::delete('/meetings/{admin_meeting}', [AdminMeetingController::class, 'destroy'])
-            ->whereNumber('admin_meeting')
-            ->name('meetings.destroy');
+            ->name('meetings.update');        
         Route::post('/meetings/{admin_meeting}/guides', [AdminMeetingController::class, 'addGuide'])
             ->whereNumber('admin_meeting')
             ->name('meetings.guides.add');

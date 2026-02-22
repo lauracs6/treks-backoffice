@@ -122,34 +122,7 @@
                                     <a href="{{ route('admin.places.edit',$place->id) }}"
                                        class="px-3 py-1 bg-sky-400 hover:bg-sky-700 text-white text-xs font-semibold shadow-sm shadow-gray-700">
                                         Edit
-                                    </a>
-
-                                    @if ($place->status === 'y')
-                                        <form method="POST" action="{{ route('admin.places.deactivate', $place->id) }}" onsubmit="return confirm('Are you sure you want to deactivate this place?');">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="px-3 py-1 bg-red-500 hover:bg-red-700 text-white text-xs font-semibold shadow-sm">
-                                                Deactivate
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form method="POST" action="{{ route('admin.places.activate', $place->id) }}" onsubmit="return confirm('Are you sure you want to activate this place?');">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button type="submit" class="px-3 py-1 bg-emerald-500 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm">
-                                                Activate
-                                            </button>
-                                        </form>
-                                    @endif
-
-                                    <form method="POST" action="{{ route('admin.places.destroy', $place->id) }}" onsubmit="return confirm('Are you sure you want to delete this place?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="px-3 py-1 bg-red-800 hover:bg-red-900 text-white text-xs font-semibold shadow-sm">
-                                        Delete
-                                    </button>
-                                </form>
-
+                                    </a>                                                                  
                                 </div>
                             </td>
                         </tr>

@@ -182,27 +182,6 @@ class InterestingPlaceController extends Controller
         return redirect()
             ->route('admin.places.index')
             ->with('status', 'Place activated.');
-    }
-
-    public function destroy(InterestingPlace $adminPlace)
-    {
-        // Revisar si tiene relaciones
-        $hasTreks = $adminPlace->treks()->exists();
-        $hasComments = method_exists($adminPlace, 'comments') && $adminPlace->comments()->exists();
-
-        if ($hasTreks || $hasComments) {
-            return redirect()
-                ->route('admin.places.index')
-                ->with('error', 'Cant be deleted due to its existing relations.');
-        }
-
-        // Si no tiene relaciones, se puede eliminar
-        $adminPlace->delete();
-
-        return redirect()
-            ->route('admin.places.index')
-            ->with('status', 'Place deleted.');
-    }
-
+    }  
 
 }

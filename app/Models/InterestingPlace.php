@@ -9,8 +9,7 @@ class InterestingPlace extends Model
     protected $fillable = [
         'gps',
         'name',
-        'place_type_id',
-        'status',
+        'place_type_id',        
     ];
 
     public function placeType()
